@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <kafka2HDFSconfig>
+    <inputconfig>
+      <!-- 消费topic -->
+      <topic>k8test</topic>
+      <partitonnumber>3</partitonnumber> <!-- 分区数量 -->
+      <!-- 可以自定义指定分区的开始偏移量 分区：开始偏移量：结束偏移量 ,优先级低于zookeeper上已经存的的offset,程序初始化的时候的参数-->
+	  <partitionsandoffsets>0:-1:-1;1:-1:-1;2:-1:-1</partitionsandoffsets>
+	  <kafkazkstr>10.100.10.183:2181</kafkazkstr>
+	  <offsetzkstr>10.100.10.183:2181</offsetzkstr> 
+	  <!-- 存放指定主题和consumer消费的偏移量在zk中的路径 -->
+	  <offsetzkroot>/kafka2HDFS_offset/coutinfo_offset</offsetzkroot>
+    </inputconfig>
+    <outputconfig>
+      <rootdir>hdfs://10.100.10.186:9000/user</rootdir>
+      <filesize>64</filesize>
+    </outputconfig>
+    <brokerpath>/brokers</brokerpath>
+    <fetchinterval>3000</fetchinterval> <!-- 设置hadoopconsumer 取kafka数据的时间间隔 -->
+  </kafka2HDFSconfig>
